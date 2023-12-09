@@ -23,6 +23,7 @@ const initialState ={
 const AuthContext = createContext(initialState)
 
 export const AuthProvider = ({children}) => {
+
     const [user,setUser] = useState(initialUser)
     const [isLoading,setIsLoading] = useState(true)
     const [isAuthenticated,setIsAuthenticated] = useState(false)
@@ -44,7 +45,7 @@ export const AuthProvider = ({children}) => {
                     
                 })
                 setIsAuthenticated(true)
-
+setIsLoading(false)
                 return true
             }
             return false
@@ -52,10 +53,7 @@ export const AuthProvider = ({children}) => {
             console.log(error);
             return false
         }
-        finally{ 
-            setIsLoading(false)
-            
-        }
+        
     }
  
     useEffect(()=>{ 
@@ -71,6 +69,7 @@ export const AuthProvider = ({children}) => {
     
         checkAuthUser();  
     },[])
+
 
     const value = {
         user,setUser,isLoading, isAuthenticated,setIsAuthenticated,checkAuthUser

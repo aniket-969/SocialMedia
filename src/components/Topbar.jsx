@@ -5,8 +5,12 @@ import { Link } from 'react-router-dom';
 
 const Topbar = () => {
     
-    const { setIsAuthenticated,user } = useUserContext()
+    const { setIsAuthenticated,user,isLoading } = useUserContext()
    
+if(isLoading){
+  return <p>Loading...</p>
+}
+
     return (
         <div>
             <div className="flex-between py-4 px-5">
@@ -23,7 +27,7 @@ const Topbar = () => {
 
             <Link to={`/profile/${user.id}`} className="flex-center gap-3">
             <img
-              src={user.imageUrl }
+              src={user?.imageUrl } 
               alt="profile"
               className="h-8 w-8 rounded-full"
             />

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAllPosts, getFilePreview } from "../../lib/appwrite/api";
 
-const Home = () => {
-  
+const Home = () => { 
+
   const [posts, setPosts] = useState([]);
   const [postImages, setPostImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,6 +13,7 @@ const Home = () => {
         const postData = await getAllPosts();
         setPosts(postData.documents);
         fetchFilePreview(postData.documents);
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -34,6 +35,7 @@ const Home = () => {
       }
     };
 
+
     fetchData();
   }, []);
 
@@ -41,11 +43,14 @@ if(loading){
   return <p>Loading...</p>;
 }
 
+
   return (
     <div>
       {posts.map((post, index) => (
         <div key={post.$id}>
-          <h1>{post.title}</h1>
+ <p>{post.name}</p>
+ <p>{post.username}</p>
+          <h1>{post.title}</h1> 
           <p>{post.desc}</p>
           {postImages[index] && <img src={postImages[index]} alt="" />}
         </div>

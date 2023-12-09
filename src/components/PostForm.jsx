@@ -48,17 +48,23 @@ const PostForm = () => {
 
     const onPostsubmit = async(data) => {
         console.log(data); 
-        console.log(baseImage);
 
+        if(baseImage){
         const newPost = await createPost({
             imageId:baseImage,
             title:data?.title,
             desc:data?.desc,
-            userid:user?.id
+            name:user?.name,
+            username:user?.username
         })
         if(!newPost){
             toast.error("Please try again")
         }
+    }
+    else{
+        toast.error("Please Try again")
+        return;
+    }
         toast.success("Uploaded succesfully")
         navigate('/')
     }

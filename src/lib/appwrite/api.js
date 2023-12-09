@@ -101,12 +101,12 @@ console.log(currentAccount);
   return null;
 }
 
-export async function createPost({title,desc,userid,imageId}){
+export async function createPost({title,desc,name,username,imageId}){
       try {
         return await databases.createDocument(appwriteConfig.databaseId,
           appwriteConfig.postCollectionId,
           ID.unique(),
-          {title,desc,userid,imageId}
+          {title,desc,name,username,imageId}
           )
       } catch (error) {
        console.log(error);
@@ -176,3 +176,4 @@ export async function getAllPosts(){
     
   }
 }
+
