@@ -81,7 +81,6 @@ export async function getAccount() {
 export async function getCurrentUser(){
   try {
     const currentAccount = await getAccount()
-console.log(currentAccount);
 
     if(!currentAccount) throw error
 
@@ -177,3 +176,15 @@ export async function getAllPosts(){
   }
 }
 
+export async function getPost(postId){
+  try {
+    return await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
+}

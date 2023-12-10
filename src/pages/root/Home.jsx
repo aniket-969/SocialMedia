@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllPosts, getFilePreview } from "../../lib/appwrite/api";
+import { Link } from "react-router-dom";
 
 const Home = () => { 
 
@@ -28,8 +29,6 @@ const Home = () => {
         );
 
         setPostImages(images);
-
-        console.log(images);
       } catch (error) {
         console.error("Error fetching file preview:", error);
       }
@@ -43,17 +42,19 @@ if(loading){
   return <p>Loading...</p>;
 }
 
-
+ 
   return (
     <div>
       {posts.map((post, index) => (
+         <Link key={post.$id} to={`/posts/${post.$id}`}>
         <div key={post.$id}>
  <p>{post.name}</p>
- <p>{post.username}</p>
+ <p>{post.username}</p> 
           <h1>{post.title}</h1> 
           <p>{post.desc}</p>
           {postImages[index] && <img src={postImages[index]} alt="" />}
         </div>
+        </Link>
       ))}
     </div>
   );
