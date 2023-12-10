@@ -113,12 +113,28 @@ export async function createPost({title,desc,name,username,imageId}){
       }
 }
 
-export async function createComment({postId,userId,message}){
+export async function createComment(id,name,username,comment){
   try {
-    return 
+    const commentData = await databases.createDocument(appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      ID.unique(),
+      {postId:id,name,username,comment}
+      )
+      if(commentData) return commentData
+      throw error
   } catch (error) {
+    console.log(error);
     
   }
+}
+
+export async function getLikes(postId,likesArray){
+    try {
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
 }
 
 export async function deletePost(docId){

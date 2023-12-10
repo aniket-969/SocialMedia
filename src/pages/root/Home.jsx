@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllPosts, getFilePreview } from "../../lib/appwrite/api";
 import { Link } from "react-router-dom";
+import { FaComment } from "react-icons/fa"
 
 const Home = () => { 
 
@@ -51,8 +52,10 @@ if(loading){
  <p>{post.name}</p>
  <p>{post.username}</p> 
           <h1>{post.title}</h1> 
-          <p>{post.desc}</p>
+          <p>{post.desc}</p> 
           {postImages[index] && <img src={postImages[index]} alt="" />}
+         <FaComment/>
+
         </div>
         </Link>
       ))}

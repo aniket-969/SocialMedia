@@ -12,7 +12,7 @@ const isAuthenticated =false
       <Navigate to="/"/>
     ):(
       <>
-      <section>
+      <section className='flex justify-center border-2 border-solid border-green-600 h-screen'>
         <Outlet/>
       </section>
       </>

@@ -7,10 +7,14 @@ import toast from "react-hot-toast";
 import { useUserContext } from "../../../context/AuthProvider";
 import { Link, useNavigate } from 'react-router-dom';
 import { signInUser } from "../../../lib/appwrite/api";
+import { FaEnvelope } from "react-icons/fa6";
+import { FaImagePortrait } from "react-icons/fa6"
+import { FaUser } from "react-icons/fa6";
+import { FaRegKeyboard } from "react-icons/fa6";
 
 const SignupForm = () => {
 
- 
+
   const schema = yup.object().shape({
     name: yup.string().required("Pls write your first name"),
     email: yup.string().email().required(),
@@ -52,39 +56,54 @@ const SignupForm = () => {
       return toast.error("Login failed")
 
 
-    } 
+    }
 
     return toast.success("User signed in successfully")
   };
 
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(signUserUp)}>
-        <label> Name:</label>
-        <input
-          type="text"
-          placeholder="Enter your name"
-          {...register("name")}
-        />
-        <p className="text-red-500">{errors.firstName?.message}</p>
-        <label> Username:</label>
-        <input
-          type="text"
-          placeholder="Enter your username"
-          {...register("username")}
-        />
-        <p className="text-red-500">{errors.firstName?.message}</p>
+    <div className="flex flex-col items-center gap-12 py-8">
 
-        <label>email</label>
-        <input type="email" {...register("email")} placeholder="Enter your email" />
-        <label>password</label>
-        <input type="password" {...register("password")} placeholder="Enter the password" />
+      <div>
+        <h1>Sign Up</h1>
+        <h2>Create Your Account</h2>
+      </div>
 
-        <input type="submit" />
-      </form>
-      <Link to='/sign-in'>Sign in</Link> 
+      <div>
+        <form onSubmit={handleSubmit(signUserUp)}>
+
+          <FaUser />
+          <input
+            type="text"
+            placeholder="Enter your name"
+            {...register("name")}
+          />
+          <p className="text-red-500">{errors.firstName?.message}</p>
+
+          <FaImagePortrait />
+          <input
+            type="text"
+            placeholder="Enter your username"
+            {...register("username")}
+          />
+          <p className="text-red-500">{errors.firstName?.message}</p>
+
+          <FaEnvelope />
+          <input type="email" {...register("email")} placeholder="Enter your email" />
+
+          <FaRegKeyboard />
+          <input type="password" {...register("password")} placeholder="Enter the password" />
+          <input type="submit" value="Sign Up" />
+        </form>
+      </div>
+
+      <div>
+        <p>Already a user?</p>
+        <Link to='/sign-in'>Sign in</Link>
+      </div>
     </div>
+
   );
 };
 

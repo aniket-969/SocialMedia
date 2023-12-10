@@ -11,7 +11,8 @@ import PostDetails from "./components/PostDetails";
 import CreatePost from "./components/CreatePost";
 
 function App() {
-  return (<main>
+  return (
+  <main className=" h-screen">
     
     <Routes>
       <Route element={<AuthLayout />}>
