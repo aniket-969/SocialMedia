@@ -25,3 +25,11 @@ input::placeholder,textarea::placeholder{
 .border-tea{
     border: 2px solid teal;
 }
+
+.vertical-line {
+    height: 1.5rem; /* Set the height of the line as needed */
+    width: 0.16rem; /* Set the width of the line */
+    background-color: #9d4edd; /* Set the color of the line */
+    margin: 0 1rem; /* Adjust the margin to control the space around the line */
+    
+  }

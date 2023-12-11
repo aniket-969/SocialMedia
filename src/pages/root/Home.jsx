@@ -46,24 +46,25 @@ const Home = () => {
 
 
   return (
-    <div className="flex flex-col gap-5 border-re p-4 justify-center">
+    <div className="flex flex-col gap-5 border-re p-4 justify-center items-cetner max-w-[1600px]">
 
       {posts.map((post, index) => (
 
         <Link key={post.$id} to={`/posts/${post.$id}`} >
 
-          <div key={post.$id} className="flex flex-col border-or gap-2 items-center py-5 justify-center">
+          <div key={post.$id} className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem] my-5 ">
 
-            <div className="flex gap-5">
-              <p>{post.name}</p>
+            <div className="flex gap-3">
+              <p className=" ">{post.name}</p>
+              <div className="vertical-line"></div>
               <p>@{post.username}</p>
             </div>
 
-            <div className="w-[25rem] border-tea m-2 ">
+            <div className="w-[25rem] m-2 ">
               {postImages[index] && <img className="rounded-[2rem]" src={postImages[index]} alt="" />}
             </div>
 
-            <p>{post.desc}</p>
+            <p className="bg-[#9d4edd] px-8 py-4 max-w-[70%] text-white rounded-xl">{post.desc}</p>
 
             <div className="flex gap-4">
               <FaRegComment />

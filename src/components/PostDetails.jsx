@@ -10,7 +10,7 @@ const PostDetails = () => {
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState('');
 
-  const { id } = useParams()
+  const { id } = useParams() 
 
   useEffect(() => {
 
