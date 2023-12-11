@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getAllPosts, getFilePreview } from "../../lib/appwrite/api";
 import { Link } from "react-router-dom";
-import { FaComment } from "react-icons/fa"
+import { FaRegComment } from "react-icons/fa"
+import { FaRegHeart } from "react-icons/fa";
 
-const Home = () => { 
+const Home = () => {
 
   const [posts, setPosts] = useState([]);
   const [postImages, setPostImages] = useState([]);
@@ -39,24 +40,38 @@ const Home = () => {
     fetchData();
   }, []);
 
-if(loading){
-  return <p>Loading...</p>;
-}
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
- 
+
   return (
-    <div>
-      {posts.map((post, index) => (
-         <Link key={post.$id} to={`/posts/${post.$id}`}>
-        <div key={post.$id}>
- <p>{post.name}</p>
- <p>{post.username}</p> 
-          <h1>{post.title}</h1> 
-          <p>{post.desc}</p> 
-          {postImages[index] && <img src={postImages[index]} alt="" />}
-         <FaComment/>
+    <div className="flex flex-col gap-5 border-re p-4 justify-center">
 
-        </div>
+      {posts.map((post, index) => (
+
+        <Link key={post.$id} to={`/posts/${post.$id}`} >
+
+          <div key={post.$id} className="flex flex-col border-or gap-2 items-center py-5 justify-center">
+
+            <div className="flex gap-5">
+              <p>{post.name}</p>
+              <p>@{post.username}</p>
+            </div>
+
+            <div className="w-[25rem] border-tea m-2 ">
+              {postImages[index] && <img className="rounded-[2rem]" src={postImages[index]} alt="" />}
+            </div>
+
+            <p>{post.desc}</p>
+
+            <div className="flex gap-4">
+              <FaRegComment />
+              <FaRegHeart />
+            </div>
+
+
+          </div>
         </Link>
       ))}
     </div>

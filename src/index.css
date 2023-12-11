@@ -6,5 +6,22 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+input::placeholder,textarea::placeholder{
+    color: rgb(122, 121, 121);
     
+}
+
+.border-or{
+    border: 2px solid orange;
+}
+
+.border-re{
+    border: 2px solid red;
+}
+.border-tea{
+    border: 2px solid teal;
 }

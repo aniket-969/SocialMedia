@@ -18,22 +18,23 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
-      <div className="flex flex-col flex-between py-4 px-5">
+   
+      <div className="flex flex-row gap-20 py-2 px-5 mx-5 justify-center max-w-[40%] ">
+        <div className="flex gap-8 py-2 px-4 ">
+          <Link to="/" >
+            Home
+          </Link>
 
-        <Link to="/" className="flex gap-3 items-center">
-          Home
-        </Link>
-      
-      <Link to={`/profile/${user.id}`} className="flex-center gap-3">Profile</Link>
+          <Link to={`/profile/${user.id}`} className="">Profile</Link>
 
-<Link to={'/create-post'}>CreatePost</Link>
-      <button className=" w-20" onClick={signOutHandler}>SignOut</button>
+          <Link to={'/create-post'}>CreatePost</Link>
+        </div>
+
+
+        <button className=" bg-[#9d4edd] text-white font-semibold py-2 px-6  rounded-[3rem] text-sm" onClick={signOutHandler}>SignOut</button>
 
       </div>
 
-
-    </div>
   );
 };
 

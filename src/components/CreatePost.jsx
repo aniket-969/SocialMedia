@@ -3,9 +3,9 @@ import PostForm from './PostForm'
 
 const CreatePost = () => {
   return ( 
-    <div>Create a new Post
+    
         <PostForm/>
-    </div>
+ 
   )
 }
 

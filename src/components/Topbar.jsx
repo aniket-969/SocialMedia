@@ -2,38 +2,44 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../context/AuthProvider';
 import { Link } from 'react-router-dom';
+import logo from '../images/logo.png'
+import Sidebar from '../components/sidebar'
 
 const Topbar = () => {
-    
-    const { setIsAuthenticated,user,isLoading } = useUserContext()
-   
-if(isLoading){
-  return <p>Loading...</p>
-}
 
-    return (
-        <div>
-            <div className="flex-between py-4 px-5">
+  const {  user, isLoading } = useUserContext()
+
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+
+  return ( 
+
+    <div className='flex items-center justify-between gap-10 m-2 py-4 px-10 bg-[rgb(241,234,255)] border-or'>
+      <div className="">
         <Link to="/" className="flex gap-3 items-center">
           <img
-            src="https://static.vecteezy.com/system/resources/previews/022/283/190/original/single-messenger-icon-social-media-icon-design-social-media-icon-icon-design-free-vector.jpg"
-            alt="logo"
+            src={logo}
             width={130}
             height={325}
           />
-         
-        </Link> 
-        <p>InstaChat</p></div>
+        </Link>
+      </div>
 
-            <Link to={`/profile/${user.id}`} className="flex-center gap-3">
-            <img
-              src={user?.imageUrl } 
-              alt="profile"
-              className="h-8 w-8 rounded-full"
-            />
-          </Link>
-        </div>
-    )
+      <Link to={`/profile/${user.id}`} className="flex gap-7 justify-center items-center  ">
+        
+        <img
+          src={user?.imageUrl}
+          alt="profile"
+          className="h-10 w-10 rounded-full"
+        />
+        <p className='bg-[#9d4edd] text-white font-semibold py-3 px-5 rounded-[3rem]'>{user?.name}</p>
+      </Link>
+
+      <Sidebar/>
+    </div>
+
+  )
 }
 
 export default Topbar

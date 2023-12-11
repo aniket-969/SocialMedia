@@ -65,42 +65,52 @@ const SignupForm = () => {
   return (
     <div className="flex flex-col items-center gap-12 py-8">
 
-      <div>
-        <h1>Sign Up</h1>
-        <h2>Create Your Account</h2>
+      <div className="flex flex-col gap-5 items-center">
+        <h1 className="font-bold text-3xl">Sign Up</h1>
+        <h2 className="text-xl">Create Your Account</h2>
       </div>
 
-      <div>
-        <form onSubmit={handleSubmit(signUserUp)}>
+      <div >
+        <form onSubmit={handleSubmit(signUserUp)} className="flex flex-col gap-6">
 
-          <FaUser />
-          <input
-            type="text"
-            placeholder="Enter your name"
-            {...register("name")}
-          />
-          <p className="text-red-500">{errors.firstName?.message}</p>
+          <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
+            <FaUser />
+            <input className="bg-[#f1eaff]"
+              type="text"
+              placeholder=" Name"
+              {...register("name")}  
 
-          <FaImagePortrait />
-          <input
-            type="text"
-            placeholder="Enter your username"
-            {...register("username")}
-          />
-          <p className="text-red-500">{errors.firstName?.message}</p>
+            />
+            <p className="text-red-500">{errors.firstName?.message}</p>
+          </div>
 
-          <FaEnvelope />
-          <input type="email" {...register("email")} placeholder="Enter your email" />
+        
+          <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">    <FaImagePortrait />
+            <input className="bg-[#f1eaff]"
+              type="text"
+              placeholder=" Username"
+              {...register("username")}
+            />
+            <p className="text-red-500">{errors.firstName?.message}</p>
+          </div>
 
-          <FaRegKeyboard />
-          <input type="password" {...register("password")} placeholder="Enter the password" />
-          <input type="submit" value="Sign Up" />
+          <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
+            <FaEnvelope />
+            <input type="email" {...register("email")} placeholder=" Email" className="bg-[#f1eaff]" />
+          </div>
+ 
+          <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl ">
+            <FaRegKeyboard />
+            <input type="password" {...register("password")} placeholder=" Password" className="bg-[#f1eaff]" />
+          </div>
+
+          <input type="submit" value="Sign Up" className="bg-[#9d4edd] text-white font-semibold py-4 px-8  rounded-[3rem] text-2xl" />
         </form>
       </div>
 
-      <div>
+      <div className="flex gap-5">
         <p>Already a user?</p>
-        <Link to='/sign-in'>Sign in</Link>
+        <Link to='/sign-in' className="text-[#9d4edd] font-semibold">Sign in</Link>
       </div>
     </div>
 
