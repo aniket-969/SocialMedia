@@ -84,42 +84,41 @@ const PostForm = () => {
 
     return (
 
-        <div className='flex flex-col  items-center justify-center gap-3 max-w-[1600px] py-2'>
+        <div className='flex flex-col  items-center justify-center gap-3 max-w-[1600px] py-10 border-or '>
 
             <h1 className='text-2xl font-semibold'>Create a new post</h1>
 
             <div className='flex flex-col items-center gap-2'>
 
                 <p>image selected:</p>
-                <img src={imageUrl}className='w-[30%]' alt="" />
+                <img src={imageUrl}className='w-[30%] py-4 rounded-xl' alt="" />
             </div>
- 
-            <form className='flex flex-col items-center gap-2' onSubmit={handleSubmit(onPostsubmit)}>
+  
+            <form className='flex flex-col items-center gap-2 border-solid border-2 border-[#7E30E1] py-6 max-w-[95%] ' onSubmit={handleSubmit(onPostsubmit)}>
 
-                <div className='flex flex-col gap-2'>
-                    <div>
-                        <input className="bg-[#f1eaff] px-8 py-4 flex  items-center gap-4 rounded-3xl"
+                <div className='flex flex-col gap-2 w-[80%]'>
+                    
+                        <input className="bg-[#f1eaff] px-8 py-4 rounded-3xl"
                             type="text"
                             placeholder="Add Title"
                             {...register("title")}
                         />
                         <p className="text-red-500">{errors.title?.message}</p>
 
-                    </div>
 
-                    <div>
-                        <textarea className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl"
+                    
+                        <textarea className="bg-[#f1eaff] px-8 py-4 flex  items-center gap-4 rounded-3xl"
                             type="textarea"
                             placeholder="Description..."
                             {...register("desc")}
 
                         />
                         <p className="text-red-500">{errors.firstName?.message}</p>
-                    </div>
+                    
                 </div>
 
 
-                <div className='flex items-center gap-4 my-3 p-2 border-[#9d4edd] border-solid border-2 w-[80%]'>
+                <div className='flex items-center gap-4 my-3 p-2   w-[80%]'>
                     <label>Add image:</label>
                     <input type="file" name="img" accept="image/*"
                         {...register("file")} multiple onChange={(e) => {

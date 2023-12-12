@@ -127,14 +127,35 @@ export async function createComment(id,name,username,comment){
     
   }
 }
-
-export async function getLikes(postId,likesArray){
+ 
+export async function createLikes(postId,userId){
     try {
-      
+      const likeData = await databases.createDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.likesCollectionId,
+        ID.unique(),
+        {postId,userId}
+      )
+      if(likeData) return likeData
+      throw error
     } catch (error) {
       console.log(error);
       
     }
+}
+
+export async function removeLike(likeId){
+  try {
+    await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.likesCollectionId,
+      likeId
+    )
+    return true
+  } catch (error) {
+    console.log(error);
+    
+  }
 }
 
 export async function deletePost(docId){
@@ -198,6 +219,17 @@ export async function getPost(postId){
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       postId
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+export async function getLikes(likepostId){
+  try {
+    return await databases.listDocuments(
+      appwriteConfig.databaseId,appwriteConfig.likesCollectionId,
+     [ Query.equal('postId', likepostId)]
     )
   } catch (error) {
     console.log(error);

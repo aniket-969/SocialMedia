@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAllPosts, getFilePreview } from "../../lib/appwrite/api";
+import { createLikes, getAllPosts, getFilePreview } from "../../lib/appwrite/api";
 import { Link } from "react-router-dom";
 import { FaRegComment } from "react-icons/fa"
 import { FaRegHeart } from "react-icons/fa";
+import { useUserContext } from "../../context/AuthProvider";
+import Likes from "../../components/Likes";
 
 const Home = () => {
 
@@ -10,14 +12,19 @@ const Home = () => {
   const [postImages, setPostImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const { user } = useUserContext()
+
   useEffect(() => {
+
     const fetchData = async () => {
+
       try {
+
         const postData = await getAllPosts();
         setPosts(postData.documents);
         fetchFilePreview(postData.documents);
-
         setLoading(false);
+
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -29,7 +36,7 @@ const Home = () => {
         const images = await Promise.all(
           posts.map((post) => getFilePreview(post.imageId))
         );
-
+ 
         setPostImages(images);
       } catch (error) {
         console.error("Error fetching file preview:", error);
@@ -44,15 +51,28 @@ const Home = () => {
     return <p>Loading...</p>;
   }
 
+  const handleHeartClick = async (postId) => {
+
+    const userId = user.id
+    try {
+      const liked = await createLikes(postId, userId)
+      console.log(liked);
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  };
+
 
   return (
     <div className="flex flex-col gap-5 border-re p-4 justify-center items-cetner max-w-[1600px]">
 
       {posts.map((post, index) => (
 
-        <Link key={post.$id} to={`/posts/${post.$id}`} >
+        <div key={post.$id} >
 
-          <div key={post.$id} className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem] my-5 ">
+          <Link to={`/posts/${post.$id}`} className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem] my-5 " >
 
             <div className="flex gap-3">
               <p className=" ">{post.name}</p>
@@ -66,15 +86,20 @@ const Home = () => {
 
             <p className="bg-[#9d4edd] px-8 py-4 max-w-[70%] text-white rounded-xl">{post.desc}</p>
 
-            <div className="flex gap-4">
-              <FaRegComment />
-              <FaRegHeart />
-            </div>
 
 
+          </Link>
+
+          <div className="flex gap-4 items-center justify-center pb-4">
+            <FaRegComment />
+           
+            <Likes post={post} />
           </div>
-        </Link>
+
+        </div>
+
       ))}
+
     </div>
   );
 };
