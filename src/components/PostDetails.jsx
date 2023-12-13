@@ -10,7 +10,7 @@ const PostDetails = () => {
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState('');
 
-  const { id } = useParams() 
+  const { id } = useParams()
 
   useEffect(() => {
 
@@ -43,44 +43,44 @@ const PostDetails = () => {
   }
   console.log(posts);
 
-  const createUserComment = async () => {
+  const setUserComment = async () => {
+
     try {
-     
+
+      console.log(comment);
       const userComment = await createComment(id, posts.name, posts.username, comment)
       console.log(userComment);
     } catch (error) {
       console.log(error);
     }
-  }
-
-  const getComment = () => {
-
-    console.log(comment);
-    createUserComment()
     setComment('')
-  
   }
 
   const getUserComment = (e) => {
     setComment(e.target.value)
   }
 
-
   return (
-    <div>
-      <div className="post">
-        <h2>{posts.name}</h2>
-        <h2>{posts.username}</h2>
-        <p>{posts.title}</p>
-        <p>{posts.desc}</p>
-        <img src={postImage} alt="" />
+    <div className="flex flex-col gap-5 border-re p-4 justify-center items-cetner max-w-[1600px]">
+      <div className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem] my-5 border-tea">
+       
+      <div className="flex gap-3">
+              <p className=" ">{posts.name}</p>
+              <div className="vertical-line"></div>
+              <p>@{posts.username}</p>
+            </div>
+<img src={postImage} alt="" />
+        <p className="bg-[#9d4edd] px-8 py-4 max-w-[70%] text-white rounded-xl">{posts.desc}</p>
+        
       </div>
+
       <div className="comments">
 
         <input type="text" value={comment} placeholder='Add comment...' onChange={getUserComment} />
-        <button onClick={getComment}>Add</button>
+        <button onClick={setUserComment}>Add</button>
 
       </div>
+
     </div>
   )
 }

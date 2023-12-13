@@ -100,12 +100,12 @@ export async function getCurrentUser(){
   return null;
 }
 
-export async function createPost({title,desc,name,username,imageId}){
+export async function createPost({title,desc,name,username,imageId,userId}){
       try {
         return await databases.createDocument(appwriteConfig.databaseId,
           appwriteConfig.postCollectionId,
           ID.unique(),
-          {title,desc,name,username,imageId}
+          {title,desc,name,username,imageId,userId}
           )
       } catch (error) {
        console.log(error);
@@ -225,11 +225,38 @@ export async function getPost(postId){
     
   }
 }
+
+export async function getUserPosts(userId){
+  try { 
+    return await databases.listDocuments(
+      appwriteConfig.databaseId,appwriteConfig.postCollectionId,
+     [ Query.equal('userId', userId)]
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
 export async function getLikes(likepostId){
-  try {
+  try { 
     return await databases.listDocuments(
       appwriteConfig.databaseId,appwriteConfig.likesCollectionId,
      [ Query.equal('postId', likepostId)]
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+export async function getOneLike(postId,userId){
+  try {
+    return await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.likesCollectionId,
+      [Query.equal('postId',postId)],
+      [Query.equal('userId',userId)]
     )
   } catch (error) {
     console.log(error);
