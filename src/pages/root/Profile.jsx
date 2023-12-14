@@ -11,7 +11,7 @@ const Profile = () => {
 
   const { id } = useParams()
   const [postImages, setPostImages] = useState([]);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const getUserPost = async (userId) => {
@@ -61,6 +61,10 @@ const Profile = () => {
   if (loading) {
     return <p>Loading...</p>;
   }
+
+else if(!posts || posts.length === 0){
+  return <div className='m-4 text-xl'>You don't have any posts : Please create one </div>
+}
 
   return (
     <div className="flex flex-col gap-5 border-re p-4 justify-center items-cetner max-w-[1600px]">

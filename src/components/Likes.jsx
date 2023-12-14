@@ -10,9 +10,9 @@ const Likes = ({ post }) => {
     const { user } = useUserContext()
 
     const getLikesData = async () => {
-console.log('called it');
+// console.log('called it');
         const likeData = await getLikes(post.$id)
-        console.log(likeData,post.$id);
+        // console.log(likeData,post.$id);
         setLike(likeData.documents.map((doc) => ({ userId: doc.userId, })));
         
     }
@@ -50,7 +50,7 @@ const removeLiked = async(postId)=>{
         console.log(error);   
     }
 }
-console.log(likes,post.$id);
+// console.log(likes,post.$id);
 const hasUserLiked = likes?.find((like)=> like.userId === user?.id)   
 // console.log(hasUserLiked,post.$id);
  
