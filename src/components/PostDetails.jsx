@@ -84,15 +84,15 @@ const PostDetails = () => {
   return (
 
     <div className="flex flex-col gap-6 justify-center items-cetner max-w-[1600px]">
-      <div className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem]  ">
+      <div className=" flex flex-col gap-10 items-center py-4 justify-center max-w-[95rem]  ">
 
         <div className="flex gap-3">
           <p className=" ">{posts.name}</p>
           <div className="vertical-line"></div>
           <p>@{posts.username}</p>
         </div >
-        <div className='w-[40%] flex items-center justify-center'>
-          <img src={postImage} alt="" />
+        <div className='w-[40%] flex items-center justify-center '>
+          <img src={postImage} className='rounded-[2rem]' alt="" />
         </div>
         
         <p className="bg-[#9d4edd] px-8 py-2.5 max-w-[70%] text-white rounded-xl">{posts.desc}</p>
