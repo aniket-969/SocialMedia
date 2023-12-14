@@ -61,22 +61,23 @@ const PostDetails = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5 border-re p-4 justify-center items-cetner max-w-[1600px]">
-      <div className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem] my-5 border-tea">
-       
-      <div className="flex gap-3">
-              <p className=" ">{posts.name}</p>
-              <div className="vertical-line"></div>
-              <p>@{posts.username}</p>
-            </div>
-<img src={postImage} alt="" />
-        <p className="bg-[#9d4edd] px-8 py-4 max-w-[70%] text-white rounded-xl">{posts.desc}</p>
-        
+
+    <div className="flex flex-col gap-6 border-re justify-center items-cetner max-w-[1600px]">
+      <div className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem]  border-tea">
+
+        <div className="flex gap-3">
+          <p className=" ">{posts.name}</p>
+          <div className="vertical-line"></div>
+          <p>@{posts.username}</p>
+        </div>
+        <img src={postImage} alt="" />
+        <p className="bg-[#9d4edd] px-8 py-2.5 max-w-[70%] text-white rounded-xl">{posts.desc}</p>
+
       </div>
 
-      <div className="comments">
+      <div className="flex justify-center gap-2 items-center">
 
-        <input type="text" value={comment} placeholder='Add comment...' onChange={getUserComment} />
+        <textarea type="text" value={comment} placeholder='Add comment...' onChange={getUserComment} className='border-tea w-[40%]' />
         <button onClick={setUserComment}>Add</button>
 
       </div>

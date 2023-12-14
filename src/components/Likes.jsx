@@ -10,9 +10,9 @@ const Likes = ({ post }) => {
     const { user } = useUserContext()
 
     const getLikesData = async () => {
-
+console.log('called it');
         const likeData = await getLikes(post.$id)
-        
+        console.log(likeData,post.$id);
         setLike(likeData.documents.map((doc) => ({ userId: doc.userId, })));
         
     }
@@ -40,18 +40,20 @@ const Likes = ({ post }) => {
 const removeLiked = async(postId)=>{
 
     try {
-        const getId = await getOneLike(postId,user?.id)
-        // console.log(getId,getId.documents[0].$id);
+        const userId =user?.id
+        const getId = await getOneLike(postId,userId)
+        console.log(getId,getId.documents[0].$id);
        await removeLike(getId.documents[0].$id)
-        getLikesData()
+       await getLikesData() 
       
     } catch (error) { 
         console.log(error);   
     }
 }
-// console.log(likes,post.desc);
+console.log(likes,post.$id);
 const hasUserLiked = likes?.find((like)=> like.userId === user?.id)   
-
+// console.log(hasUserLiked,post.$id);
+ 
     return (
         <>
          {hasUserLiked?<FaHeart className="border-or text-red-500" onClick={()=>removeLiked(post.$id)} />:<FaRegHeart onClick={() => handleHeartClick(post.$id)} />}

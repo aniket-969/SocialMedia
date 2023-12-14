@@ -255,8 +255,8 @@ export async function getOneLike(postId,userId){
     return await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.likesCollectionId,
-      [Query.equal('postId',postId)],
-      [Query.equal('userId',userId)]
+      [Query.equal('postId',postId),
+      Query.equal('userId',userId)]
     )
   } catch (error) {
     console.log(error);

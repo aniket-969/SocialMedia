@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
         try { 
             console.log(isLoading);
             const currentAccount = await getCurrentUser()
-            console.log(currentAccount);
+            // console.log(currentAccount);
 
             if(currentAccount) {
                 setUser({
