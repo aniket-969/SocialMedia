@@ -100,12 +100,12 @@ export async function getCurrentUser(){
   return null;
 }
 
-export async function createPost({title,desc,name,username,imageId}){
+export async function createPost({title,desc,name,username,imageId,userId}){
       try {
         return await databases.createDocument(appwriteConfig.databaseId,
           appwriteConfig.postCollectionId,
           ID.unique(),
-          {title,desc,name,username,imageId}
+          {title,desc,name,username,imageId,userId}
           )
       } catch (error) {
        console.log(error);
@@ -113,12 +113,12 @@ export async function createPost({title,desc,name,username,imageId}){
       }
 }
 
-export async function createComment(id,name,username,comment){
+export async function createComment(id,name,username,comment,userId){
   try {
     const commentData = await databases.createDocument(appwriteConfig.databaseId,
       appwriteConfig.commentsCollectionId,
       ID.unique(),
-      {postId:id,name,username,comment}
+      {postId:id,name,username,comment,userId}
       )
       if(commentData) return commentData
       throw error
@@ -225,11 +225,51 @@ export async function getPost(postId){
     
   }
 }
+
+export async function getUserPosts(userId){
+  try { 
+    return await databases.listDocuments(
+      appwriteConfig.databaseId,appwriteConfig.postCollectionId,
+     [ Query.equal('userId', userId)]
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
 export async function getLikes(likepostId){
-  try {
+  try { 
     return await databases.listDocuments(
       appwriteConfig.databaseId,appwriteConfig.likesCollectionId,
      [ Query.equal('postId', likepostId)]
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+export async function getOneLike(postId,userId){
+  try {
+    return await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.likesCollectionId,
+      [Query.equal('postId',postId),
+      Query.equal('userId',userId)]
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+export async function getPostComments(postId){
+  try {
+    return await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      [Query.equal('postId',postId)]
     )
   } catch (error) {
     console.log(error);

@@ -15,7 +15,7 @@ const Topbar = () => {
 
   return ( 
 
-    <div className='flex items-center justify-between gap-10 m-2 py-4 px-10 bg-[rgb(241,234,255)] border-or'>
+    <div className='flex items-center justify-between gap-10 m-2 py-4 px-10 bg-[rgb(241,234,255)] '>
       <div className="">
         <Link to="/" className="flex gap-3 items-center">
           <img
@@ -26,7 +26,7 @@ const Topbar = () => {
         </Link>
       </div>
 
-      <Link to={`/profile/${user.id}`} className="flex gap-7 justify-center items-center  ">
+      <Link to={`/profile/${user.id}`} className="flex gap-7 justify-center items-center ">
         
         <img
           src={user?.imageUrl}

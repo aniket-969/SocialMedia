@@ -34,12 +34,33 @@ const PostForm = () => {
 
         const file = await e.target.files[0];
         setFile(file)
-        try {
-            const uploadedFile = await uploadFile(file);
-            // console.log(uploadedFile);
-            // console.log(uploadedFile.$id);
-            setBaseImage(uploadedFile.$id)
 
+        try {
+
+            const uploadedFilePromise = new Promise(async (resolve, reject) => {
+                try {
+                    const uploadedFile = await uploadFile(file);
+                    resolve(uploadedFile);
+                } catch (error) {
+                    reject(error);
+                }
+            });
+
+            // Set a timeout to wait for the file upload to complete
+            const timeoutPromise = new Promise((resolve) => {
+                setTimeout(resolve, 5000); 
+                 
+            });
+
+            // Wait for either the file upload to complete or the timeout
+            const uploadedFile = await Promise.race([uploadedFilePromise, timeoutPromise]);
+
+            if (uploadedFile) {
+                setBaseImage(uploadedFile.$id);
+                
+            } else {
+               toast.error("Wait... File is too large")
+            }
 
         } catch (error) {
             console.error("Error uploading file:", error);
@@ -48,22 +69,33 @@ const PostForm = () => {
     }
 
     const onPostsubmit = async (data) => {
+
         console.log(data);
+        console.log(baseImage);
 
         if (baseImage) {
-            const newPost = await createPost({
-                imageId: baseImage,
-                title: data?.title,
-                desc: data?.desc,
-                name: user?.name,
-                username: user?.username
-            })
-            if (!newPost) {
-                toast.error("Please try again")
+
+            try {
+                const newPost = await createPost({
+                    imageId: baseImage,
+                    title: data?.title,
+                    desc: data?.desc,
+                    name: user?.name,
+                    username: user?.username,
+                    userId:user?.id
+                })
+
+                if (!newPost) {
+                    toast.error("Please try again")
+                }
+            } catch (error) {
+                console.log(error);
             }
+
         }
+
         else {
-            toast.error("Please Try again")
+            toast.error("Please Try again,File is too large")
             return;
         }
         toast.success("Uploaded succesfully")
@@ -91,30 +123,30 @@ const PostForm = () => {
             <div className='flex flex-col items-center gap-2'>
 
                 <p>image selected:</p>
-                <img src={imageUrl}className='w-[30%] py-4 rounded-xl' alt="" />
+                <img src={imageUrl} className='w-[30%] py-4 rounded-xl' alt="" />
             </div>
-  
+
             <form className='flex flex-col items-center gap-2 border-solid border-2 border-[#7E30E1] py-6 max-w-[95%] ' onSubmit={handleSubmit(onPostsubmit)}>
 
                 <div className='flex flex-col gap-2 w-[80%]'>
-                    
-                        <input className="bg-[#f1eaff] px-8 py-4 rounded-3xl"
-                            type="text"
-                            placeholder="Add Title"
-                            {...register("title")}
-                        />
-                        <p className="text-red-500">{errors.title?.message}</p>
+
+                    <input className="bg-[#f1eaff] px-8 py-4 rounded-3xl"
+                        type="text"
+                        placeholder="Add Title"
+                        {...register("title")}
+                    />
+                    <p className="text-red-500">{errors.title?.message}</p>
 
 
-                    
-                        <textarea className="bg-[#f1eaff] px-8 py-4 flex  items-center gap-4 rounded-3xl"
-                            type="textarea"
-                            placeholder="Description..."
-                            {...register("desc")}
 
-                        />
-                        <p className="text-red-500">{errors.firstName?.message}</p>
-                    
+                    <textarea className="bg-[#f1eaff] px-8 py-4 flex  items-center gap-4 rounded-3xl"
+                        type="textarea"
+                        placeholder="Description..."
+                        {...register("desc")}
+
+                    />
+                    <p className="text-red-500">{errors.firstName?.message}</p>
+
                 </div>
 
 
