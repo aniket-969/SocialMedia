@@ -66,33 +66,36 @@ const Home = () => {
 
 
   return (
-    <div className="flex flex-col gap-5 border-re p-4 justify-center items-cetner max-w-[1600px]">
+    <div className="flex flex-col gap-5 border-re p-4 justify-center items-cetner max-w-[1600px] ">
 
       {posts.map((post, index) => (
 
-        <div key={post.$id} >
+        <div key={post.$id} className=" shadow-lg rounded-2xl">
 
-          <Link to={`/posts/${post.$id}`} className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem] my-5 " >
+          <Link to={`/posts/${post.$id}`} className="flex flex-col gap-4 items-center py-4 justify-center max-w-[95rem] my-5" >
 
-            <div className="flex gap-3">
+            <div className="flex md:gap-3"> 
               <p className=" ">{post.name}</p>
               <div className="vertical-line"></div>
               <p>@{post.username}</p>
             </div>
 
-            <div className="w-[25rem] m-2 ">
+            <div className="max-w-[25rem] m-2 ">
               {postImages[index] && <img className="rounded-[2rem]" src={postImages[index]} alt="" />}
             </div>
 
-            <p className="bg-[#9d4edd] px-8 py-4 max-w-[70%] text-white rounded-xl">{post.desc}</p>
+            <p className=" border-c bg-[#9d4edd] px-4 max-w-[90%] text-white rounded-xl md:px-8 py-3 text-base">{post.desc}</p> 
 
 
 
           </Link>
 
           <div className="flex gap-4 items-center justify-center pb-4">
+
+          <Link to={`/posts/${post.$id}`}> 
             <FaRegComment />
-           
+           </Link>
+
             <Likes post={post} />
           </div>
 

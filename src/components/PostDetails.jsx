@@ -86,40 +86,48 @@ const PostDetails = () => {
     <div className="flex flex-col gap-6 justify-center items-cetner max-w-[1600px]">
       <div className=" flex flex-col gap-10 items-center py-4 justify-center max-w-[95rem]  ">
 
-        <div className="flex gap-3">
+        <div className="flex md:gap-3">
           <p className=" ">{posts.name}</p>
           <div className="vertical-line"></div>
           <p>@{posts.username}</p>
         </div >
-        <div className='w-[40%] flex items-center justify-center '>
+
+        <div className='max-w-[25rem] flex items-center justify-center mx-4 '>
           <img src={postImage} className='rounded-[2rem]' alt="" />
         </div>
-        
+
         <p className="bg-[#9d4edd] px-8 py-2.5 max-w-[70%] text-white rounded-xl">{posts.desc}</p>
 
       </div>
 
-      <div className="flex justify-center gap-2 items-center">
+      <div className="flex justify-center gap-2 items-center mx-4">
 
-        <textarea type="text" value={comment} placeholder='Add comment...' onChange={getUserComment} className='border-tea w-[40%]' />
+        <textarea type="text" value={comment} placeholder='Add comment...' onChange={getUserComment} className='w-full border-tea md:w-[50%]' />
         <button onClick={setUserComment}>Add</button>
 
       </div>
-      <p className='text-2xl flex items-center my-4 justify-center'>Comments:</p>
-      {postComments.map((comment, index) => (
 
-        <div key={index} className=' flex flex-col gap-4 justify-center items-center px-8  my-4  w-[]'>
+      <div className='flex flex-col gap-8 mt-4 mb-10 mx-2 '>
 
-          <div className="flex gap-3 text-md">
-            <p> {comment.name}</p>
-            <div className="vertical-line"></div>
-            <p> {comment.username}</p>
+        <p className='text-2xl flex items-center justify-center '>Comments:</p>
+
+        {postComments.map((comment, index) => (
+
+          <div key={index} className=' flex flex-col gap-4 justify-center items-start p-6 rounded-md shadow-md '> 
+
+            <div className="flex gap-3 text-md ">
+              <p> {comment.name}</p>
+              <div className="vertical-line"></div>
+              <p> {comment.username}</p>
+            </div>
+
+    <p className='text-xl w-[90%] '>{comment.comment}</p>
+
+
           </div>
+        ))}
+      </div>
 
-          <p className='text-xl'>{comment.comment}</p>
-
-        </div>
-      ))}
 
     </div>
   )

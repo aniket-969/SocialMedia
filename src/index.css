@@ -15,15 +15,23 @@ input::placeholder,textarea::placeholder{
     
 }
 
-.border-or{
+/* .border-or{
     border: 2px solid orange;
 }
 
 .border-re{
     border: 2px solid red;
-}
+} */
 .border-tea{
     border: 2px solid teal;
+}
+
+.border-b{
+    border:2px solid blue
+}
+
+.border-c{
+    border:2px solid crimson
 }
 
 .vertical-line {

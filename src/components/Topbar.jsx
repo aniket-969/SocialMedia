@@ -15,8 +15,8 @@ const Topbar = () => {
 
   return ( 
 
-    <div className='flex items-center justify-between gap-10 m-2 py-4 px-10 bg-[rgb(241,234,255)] '>
-      <div className="">
+    <div className='flex items-center justify-between gap-10 m-2 py-4 px-10 bg-[rgb(241,234,255)] shadow-md '>
+      <div className=""> 
         <Link to="/" className="flex gap-3 items-center">
           <img
             src={logo}
@@ -26,7 +26,7 @@ const Topbar = () => {
         </Link>
       </div>
 
-      <Link to={`/profile/${user.id}`} className="flex gap-7 justify-center items-center ">
+      <Link to={`/profile/${user.id}`} className=" hidden lg:flex gap-7 justify-center items-center  ">
         
         <img
           src={user?.imageUrl}
@@ -35,7 +35,7 @@ const Topbar = () => {
         />
         <p className='bg-[#9d4edd] text-white font-semibold py-3 px-5 rounded-[3rem]'>{user?.name}</p>
       </Link>
-
+ 
       <Sidebar/>
     </div>
 

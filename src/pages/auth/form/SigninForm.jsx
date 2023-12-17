@@ -17,7 +17,7 @@ const SigninForm = () => {
   const schema = yup.object().shape({
 
     email: yup.string().email().required(),
-    password: yup.string().min(4).required()
+    password: yup.string().min(8).required()
   })
   const navigate = useNavigate()
 
@@ -53,27 +53,43 @@ const SigninForm = () => {
   return (
     <div className="flex flex-col items-center gap-12 py-8">
 
-      <div  className="flex flex-col gap-5 items-center">
+      <div className="flex flex-col gap-5 items-center">
         <h1 className="font-bold text-3xl">Welcome Back</h1>
-        <h2  className="text-xl">Enter your credential to login</h2>
+        <h2 className="text-xl">Enter your credential to login</h2>
       </div>
 
-<div >
-      <form onSubmit={handleSubmit(login)} className="flex flex-col gap-6">
- 
-        <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
-          <FaEnvelope />
-          <input className="bg-[#f1eaff]" type="email" {...register("email")} placeholder="Email" />
-        </div>
+      <div >
+        <form onSubmit={handleSubmit(login)} className="flex flex-col gap-6">
 
-        <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
-          <FaRegKeyboard />
-          <input className="bg-[#f1eaff]" type="password" {...register("password")} placeholder="Password" />
+        <div>
+            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
+              <FaEnvelope />
+              <input
+                type="email"
+                {...register("email")}
+                placeholder=" Email"
+                className="bg-[#f1eaff]"
+              />
 
-        </div>
-        <input type="submit" value="Sign in" className="bg-[#9d4edd] text-white font-semibold py-4 px-8  rounded-[3rem] text-2xl"/>
-      </form>
-</div>
+            </div> <p className="text-red-500">{errors.email?.message}</p>
+          </div>
+
+          <div>
+            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl ">
+              <FaRegKeyboard />
+              <input
+                type="password"
+                {...register("password")}
+                placeholder=" Password"
+                className="bg-[#f1eaff]"
+              />
+            </div>
+            <p className="text-red-500">{errors.password?.message}</p>
+          </div>
+
+          <input type="submit" value="Sign in" className="bg-[#9d4edd] text-white font-semibold py-4 px-8  rounded-[3rem] text-2xl" />
+        </form>
+      </div>
 
       <div>
         <p>Don't have an account?</p>

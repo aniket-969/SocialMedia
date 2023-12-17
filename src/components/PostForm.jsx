@@ -13,6 +13,7 @@ const PostForm = () => {
     const [baseImage, setBaseImage] = useState('');
     const [file, setFile] = useState('')
     const [imageUrl, setImageUrl] = useState(null)
+    const [loading, setLoading] = useState(null)
 
     const schema = yup.object().shape({
 
@@ -34,33 +35,24 @@ const PostForm = () => {
 
         const file = await e.target.files[0];
         setFile(file)
+        setLoading(true)
 
         try {
-
-            const uploadedFilePromise = new Promise(async (resolve, reject) => {
-                try {
-                    const uploadedFile = await uploadFile(file);
-                    resolve(uploadedFile);
-                } catch (error) {
-                    reject(error);
-                }
-            });
-
-            // Set a timeout to wait for the file upload to complete
-            const timeoutPromise = new Promise((resolve) => {
-                setTimeout(resolve, 5000); 
-                 
-            });
-
-            // Wait for either the file upload to complete or the timeout
-            const uploadedFile = await Promise.race([uploadedFilePromise, timeoutPromise]);
-
+            console.log(loading);
+            const uploadedFile = await uploadFile(file);
+            setLoading(false)
+            
+            console.log(uploadedFile);
             if (uploadedFile) {
+                console.log('file is uploaded');
                 setBaseImage(uploadedFile.$id);
-                
+                toast.success('File uploaded successfully');
             } else {
-               toast.error("Wait... File is too large")
+                toast.error("Please select a file");
             }
+
+            setBaseImage(uploadedFile.$id);
+
 
         } catch (error) {
             console.error("Error uploading file:", error);
@@ -70,7 +62,7 @@ const PostForm = () => {
 
     const onPostsubmit = async (data) => {
 
-        console.log(data);
+        console.log(loading);
         console.log(baseImage);
 
         if (baseImage) {
@@ -82,7 +74,7 @@ const PostForm = () => {
                     desc: data?.desc,
                     name: user?.name,
                     username: user?.username,
-                    userId:user?.id
+                    userId: user?.id
                 })
 
                 if (!newPost) {
@@ -95,7 +87,7 @@ const PostForm = () => {
         }
 
         else {
-            toast.error("Please Try again,File is too large")
+            toast.error("File was not uploaded")
             return;
         }
         toast.success("Uploaded succesfully")
@@ -116,14 +108,17 @@ const PostForm = () => {
 
     return (
 
-        <div className='flex flex-col  items-center justify-center gap-3 max-w-[1600px] py-10 border-or '>
+        <div className='flex flex-col  items-center justify-center gap-3 max-w-[1600px] py-10 '>
 
             <h1 className='text-2xl font-semibold'>Create a new post</h1>
 
             <div className='flex flex-col items-center gap-2'>
 
                 <p>image selected:</p>
-                <img src={imageUrl} className='w-[30%] py-4 rounded-xl' alt="" />
+                <div className='max-w-[30rem] m-4'>
+                        <img src={imageUrl} className='py-4 rounded-[3rem]' alt="" />
+                </div>
+            
             </div>
 
             <form className='flex flex-col items-center gap-2 border-solid border-2 border-[#7E30E1] py-6 max-w-[95%] ' onSubmit={handleSubmit(onPostsubmit)}>
@@ -158,6 +153,12 @@ const PostForm = () => {
                         }} />
                     <p className="text-red-500">{errors.file?.message}</p>
                 </div>
+ 
+                {loading ? (
+        <p>Wait, file is being uploaded...</p>
+      ) : (
+        <p></p>
+      )}
 
                 <input type="submit" className='bg-[#9d4edd] text-white font-semibold py-2 px-6  rounded-[3rem] text-md' />
             </form>
