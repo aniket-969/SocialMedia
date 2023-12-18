@@ -84,7 +84,7 @@ const Home = () => {
               {postImages[index] && <img className="rounded-[2rem]" src={postImages[index]} alt="" />}
             </div>
 
-            <p className=" border-c bg-[#9d4edd] px-4 max-w-[90%] text-white rounded-xl md:px-8 py-3 text-base">{post.desc}</p> 
+            <p className="  bg-[#9d4edd] px-4 max-w-[90%] text-white rounded-xl md:px-8 py-3 text-base">{post.desc}</p> 
 
 
 

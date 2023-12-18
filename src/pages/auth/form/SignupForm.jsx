@@ -62,22 +62,22 @@ const SignupForm = () => {
 
   return (
 
-    <div className="flex flex-col items-center gap-12 py-8">
+    <div className=" flex flex-col items-center gap-12 py-8 ">
 
-      <div className="flex flex-col gap-5 items-center">
+      <div className=" flex flex-col gap-5 items-center ">
         <h1 className="font-bold text-3xl">Sign Up</h1>
         <h2 className="text-xl">Create Your Account</h2>
       </div>
-
+ 
       <div>
 
         <form
           onSubmit={handleSubmit(signUserUp)}
-          className="flex flex-col gap-6"
+          className="  w-[20rem] flex flex-col gap-6"
         >
 
-          <div>
-            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
+          <div >
+            <div className="bg-[#f1eaff]  py-4 px-8 mx-2 flex items-center gap-4  rounded-3xl">
               <FaUser />
               <input
                 className="bg-[#f1eaff]"
@@ -91,7 +91,7 @@ const SignupForm = () => {
           </div>
 
           <div>
-            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
+            <div className="bg-[#f1eaff]  py-4 px-8 mx-2 flex  items-center gap-4  rounded-3xl">
               {" "}
               <FaImagePortrait />
               <input
@@ -106,7 +106,7 @@ const SignupForm = () => {
 
 
           <div>
-            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
+            <div className="bg-[#f1eaff]  py-4 px-8 mx-2 flex items-center gap-4  rounded-3xl">
               <FaEnvelope />
               <input
                 type="email"
@@ -119,7 +119,7 @@ const SignupForm = () => {
           </div>
 
           <div>
-            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl ">
+            <div className="bg-[#f1eaff]  py-4 px-8 mx-2 flex items-center gap-4  rounded-3xl">
               <FaRegKeyboard />
               <input
                 type="password"
@@ -135,7 +135,7 @@ const SignupForm = () => {
           <input
             type="submit"
             value="Sign Up"
-            className="bg-[#9d4edd] text-white font-semibold py-4 px-8  rounded-[3rem] text-2xl"
+            className="bg-[#9d4edd] text-white font-semibold py-4 mx-2 px-8  rounded-[3rem] text-2xl"
           />
         </form>
       </div>

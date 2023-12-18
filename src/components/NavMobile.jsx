@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useUserContext } from "../context/AuthProvider";
 import { signOutUser } from "../lib/appwrite/api";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 const NavMobile = (prop) => {

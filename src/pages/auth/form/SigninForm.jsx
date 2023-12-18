@@ -23,7 +23,7 @@ const SigninForm = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
-  });
+  }); 
 
   const login = async (data) => {
 
@@ -51,7 +51,7 @@ const SigninForm = () => {
 
 
   return (
-    <div className="flex flex-col items-center gap-12 py-8">
+    <div className="flex flex-col items-center gap-12 py-12 ">
 
       <div className="flex flex-col gap-5 items-center">
         <h1 className="font-bold text-3xl">Welcome Back</h1>
@@ -59,10 +59,10 @@ const SigninForm = () => {
       </div>
 
       <div >
-        <form onSubmit={handleSubmit(login)} className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit(login)} className="flex flex-col gap-6 w-[20rem]">
 
         <div>
-            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl">
+            <div className="bg-[#f1eaff]  py-4 px-8 mx-2 flex items-center gap-4  rounded-3xl">
               <FaEnvelope />
               <input
                 type="email"
@@ -75,7 +75,7 @@ const SigninForm = () => {
           </div>
 
           <div>
-            <div className="bg-[#f1eaff] px-12 py-4 flex  items-center gap-4 rounded-3xl ">
+            <div className="bg-[#f1eaff]  py-4 px-8 mx-2 flex items-center gap-4  rounded-3xl">
               <FaRegKeyboard />
               <input
                 type="password"
@@ -87,7 +87,7 @@ const SigninForm = () => {
             <p className="text-red-500">{errors.password?.message}</p>
           </div>
 
-          <input type="submit" value="Sign in" className="bg-[#9d4edd] text-white font-semibold py-4 px-8  rounded-[3rem] text-2xl" />
+          <input type="submit" value="Sign in" className="bg-[#9d4edd] text-white font-semibold py-4 px-8  mx-2 rounded-[3rem] text-2xl" />
         </form>
       </div>
 
